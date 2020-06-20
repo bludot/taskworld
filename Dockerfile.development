@@ -1,0 +1,7 @@
+FROM node:alpine
+
+WORKDIR /server
+
+RUN apk update && apk add bash
+
+EXPOSE 3000

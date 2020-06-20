@@ -2,10 +2,16 @@ version: "2"
 
 services:
   web:
-    build: .
-    command: npm run debug
+    build:
+      context: .
+      dockerfile: Dockerfile.development
+    command: '/bin/bash -c "npm install && npm run watch-node"'
     volumes:
-      - ./dist:/server/dist
+      - ./:/server/
+      - 'taskworld_deps:/server/node_modules'
     ports:
       - "3000:3000"
       - "5858:5858"
+
+volumes:
+  taskworld_deps:

@@ -1,0 +1,65 @@
+import { Ship, Coordinate, ShipType } from './types';
+import Battleship from './battleship';
+
+class Board {
+  ships: Ship[] = [
+    new Battleship(ShipType.Submarine),
+    new Battleship(ShipType.Submarine),
+    new Battleship(ShipType.Submarine),
+    new Battleship(ShipType.Submarine),
+    new Battleship(ShipType.Destroyer),
+    new Battleship(ShipType.Destroyer),
+    new Battleship(ShipType.Destroyer),
+    new Battleship(ShipType.Cruiser),
+    new Battleship(ShipType.Cruiser),
+    new Battleship(ShipType.Battleship),
+  ];
+  placements: number[] = [];
+  constructor() {
+
+  }
+  public placeShip(type: ShipType, start: Coordinate, end: Coordinate) {
+    const ship = this.ships.find(ship => type === ship.type && !ship.placed);
+    if (!ship) {
+      throw new Error('You have placed all ships of this type!');
+    }
+    
+    // TODO: Add checks if fits on board or matches hits another ship (cant overlap)
+    
+    // Check if ship matches length
+    this.checkValidPlacement(ship, start, end);
+    ship.place(start, end);
+  }
+  /* istanbul ignore next */
+  public getShips() { // remove later this is just to debug
+    return this.ships;
+  }
+
+  private checkValidPlacement(ship: Ship, start: Coordinate, end: Coordinate) {
+    // check if on board
+    if (
+      start.x < 0 ||
+      start.x > 10 ||
+      start.y < 0 ||
+      start.y > 10 ||
+      end.x < 0 ||
+      end.x > 10 ||
+      end.y < 0 ||
+      end.y > 10) {
+      throw new Error('Outside board boundaries!');
+    }
+    // we only allow vertical or horizontal
+    if ((start.x !== end.x && start.y !== end.y)) {
+      throw new Error('Only vertical or horizontal placement allowed!');
+    }
+
+    // Get distance and check
+    const distance = Math.sqrt(Math.pow((start.x - end.x),2) + Math.pow((start.y - end.y),2));
+    if (distance !== ship.length) {
+      throw new Error('Invalid coordinate placements!');
+    }
+    //TODO: check overlapping placement
+  }
+}
+
+export default Board;

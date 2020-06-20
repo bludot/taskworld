@@ -1,15 +1,10 @@
-import * as http from 'http';
+import express from 'express';
+import './game';
 
-let reqCnt = 1;
+// Express
+const app = express()
+const port = 3000
 
-http.createServer((req, res) => {
+app.get('/', (req, res) => res.send('Hello World!'))
 
-  const message = `Request Count: ${reqCnt}`;
-
-  res.writeHead(200, { 'Content-Type': 'text/html' });
-  res.end(`<html><head><meta http-equiv="refresh" content="2"></head><body>${message}</body></html>`);
-
-  console.log("handled request: " + reqCnt++);
-}).listen(3000);
-
-console.log('server running on port 3000');
+app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
