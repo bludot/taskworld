@@ -13,6 +13,40 @@ $ docker-compose up
 
 make sure you run npm install (or yarn) and run `npm test`
 
+### endpoints
+
+* `GET /new`
+  * returns id of game
+* `GET /:gameId/status`
+  * Return status of the game
+* `POST /:gameId/placeship`
+  * Send battleship to place
+  * 
+    ```json
+    {
+      "status": "placed",
+      "start": {
+          "x": 0,
+          "y": 0
+      },
+      "end": {
+          "x": 2,
+          "y": 0
+      }
+    }
+    ```
+* `POST /:gameId/attack`
+  * attack a ship
+  * 
+    ```json
+    {
+      "coordinate": {
+        "x": 0,
+        "y": 0
+      }
+    }
+    ```
+
 ### Missing tasks
 
 * Database saving
@@ -21,3 +55,5 @@ make sure you run npm install (or yarn) and run `npm test`
   * 2 main new functions: 
     * saving game state
     * restoring game state
+
+
