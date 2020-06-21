@@ -1,3 +1,4 @@
+import { Ship, ShipType, Coordinate } from './interfaces';
 import Battleship from './battleship';
 import lineLine from 'intersects/line-line';
 import linePoint from 'intersects/line-point';

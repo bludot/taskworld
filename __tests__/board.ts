@@ -1,4 +1,4 @@
-import { ShipType } from './../src/types';
+import { ShipType } from './../src/interfaces';
 import Board from './../src/board';
 import Battleship from './../src/battleship';
 

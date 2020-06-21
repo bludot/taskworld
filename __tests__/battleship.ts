@@ -1,4 +1,4 @@
-import { ShipType } from './../src/types';
+import { ShipType } from './../src/interfaces';
 import Battleship from './../src/battleship';
 
 describe('Battleship', () => {

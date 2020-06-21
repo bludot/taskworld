@@ -1,4 +1,5 @@
 /* istanbul ignore file */
+import { ShipType} from './interfaces';
 import express, { Request, Response } from 'express';
 import Game from './game';
 

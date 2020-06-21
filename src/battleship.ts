@@ -1,3 +1,5 @@
+import { Ship, ShipType, Coordinate } from './interfaces';
+
 class Battleship implements Ship {
   type: ShipType;
   start?: Coordinate;

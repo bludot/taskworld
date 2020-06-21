@@ -2,7 +2,7 @@
 //import { mocked } from 'ts-jest/utils';
 import Game from './../src/game';
 //import Board from './../src/board';
-import { ShipType } from './../src/types';
+import { ShipType } from './../src/interfaces';
 import Battleship from './../src/battleship';
 
 //jest.mock('./../src/board');

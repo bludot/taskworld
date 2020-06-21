@@ -1,3 +1,4 @@
+import { ShipType, Coordinate } from './interfaces';
 import Board from './board';
 import Battleship from 'battleship';
 
