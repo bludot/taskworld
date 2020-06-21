@@ -1,18 +1,20 @@
 /* istanbul ignore file */
-import { ShipType} from './interfaces';
-import express, { Request, Response } from 'express';
-import Game from './game';
+import express from 'express';
+import gameRouter from './routes/game';
 
 // Express
 const app = express()
 const port = 3000
+app.use(express.json());
 
-app.get('/', (_req: Request, res: Response) => res.send('Hello World!'))
+//app.get('/', (_req: Request, res: Response) => res.send('Hello World!'))
+app.use('/', gameRouter);
+
 
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
 
-const newGame = new Game();
 
+/*
 // Game start
 newGame.placeShip(ShipType.Submarine, {x: 0, y: 0}, {x: 2, y:0});
 newGame.placeShip(ShipType.Submarine, {x: 4, y: 0}, {x: 6, y:0});
@@ -64,3 +66,4 @@ newGame.attack({x:9, y:10});
 newGame.attack({x:8, y:10});
 console.log(newGame.attack({x:6, y:10}));
 console.log(newGame.attack({x:7, y:10}));
+*/

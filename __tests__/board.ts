@@ -1,6 +1,6 @@
 import { ShipType } from './../src/interfaces';
-import Board from './../src/board';
-import Battleship from './../src/battleship';
+import Board from './../src/game/board';
+import Battleship from './../src/game/battleship';
 
 describe('Board', () => {
   let instance: Board; 

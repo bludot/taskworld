@@ -1,7 +1,8 @@
-import { Ship, ShipType, Coordinate } from './interfaces';
+import { Ship, ShipType, Coordinate } from '../interfaces';
 import Battleship from './battleship';
-import lineLine from 'intersects/line-line';
-import linePoint from 'intersects/line-point';
+//import lineLine from 'intersects/line-line';
+//import linePoint from 'intersects/line-point';
+import { lineLine, linePoint } from './intersect';
 
 class Board {
   private ships: Ship[] = [
@@ -33,8 +34,8 @@ class Board {
     ship.place(start, end);
   }
   /* istanbul ignore next */
-  public getShips() { // remove later this is just to debug
-    return this.ships;
+  public getShips(): Ship[] { // remove later this is just to debug
+    return this.ships.filter(ship => ({...ship, start: undefined, end: undefined}));
   }
 
   private checkValidPlacement(ship: Ship, start: Coordinate, end: Coordinate) {
@@ -65,7 +66,7 @@ class Board {
     const placedShips = this.ships.filter(aShip => aShip !== ship && aShip.placed);
     const intersect = placedShips.some(testShip => {
       if (testShip && testShip.start && testShip.end) {
-        return lineLine(start.x, start.y, end.x, end.y, testShip.start.x, testShip.start.y, testShip.end.x, testShip.end.y, 1, 1);
+        return lineLine(start.x, start.y, end.x, end.y, testShip.start.x, testShip.start.y, testShip.end.x, testShip.end.y);
       }
       return false;
     });

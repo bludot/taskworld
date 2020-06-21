@@ -3,16 +3,16 @@
 import Game from './../src/game';
 //import Board from './../src/board';
 import { ShipType } from './../src/interfaces';
-import Battleship from './../src/battleship';
+import Battleship from './../src/game/battleship';
 
 //jest.mock('./../src/board');
 
-describe('Battleship', () => {
+describe('Game', () => {
   let instance: Game;
   beforeEach(() => {
     // Clear all instances and calls to constructor and all methods:
     //mocked(Board).mockClear();
-    instance = new Game();
+    instance = new Game(0);
   });
   it('should create Game instance', async () => {
     expect(instance).toBeInstanceOf(Game);

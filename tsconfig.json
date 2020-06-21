@@ -34,9 +34,5 @@
   "exclude": [
     "node_modules"
   ],
-  "compileOnSave": true,
-  "files": [
-    "src/index.ts",
-    "src/index.d.ts"
-  ]
+  "compileOnSave": true
 }

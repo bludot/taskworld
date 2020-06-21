@@ -1,5 +1,5 @@
 import { ShipType } from './../src/interfaces';
-import Battleship from './../src/battleship';
+import Battleship from './../src/game/battleship';
 
 describe('Battleship', () => {
   let instance: Battleship;

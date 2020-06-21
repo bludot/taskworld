@@ -8,10 +8,10 @@ export interface GameState {
 }
 
 export enum ShipType {
-  Battleship,
-  Cruiser,
-  Destroyer,
-  Submarine
+  Battleship = "Battleship",
+  Cruiser = "Cruiser",
+  Destroyer = "Destroyer",
+  Submarine = "Submarine"
 }
 
 export interface Ship {

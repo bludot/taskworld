@@ -1,4 +1,4 @@
-import { Ship, ShipType, Coordinate } from './interfaces';
+import { Ship, ShipType, Coordinate } from '../interfaces';
 
 class Battleship implements Ship {
   type: ShipType;
