@@ -1,11 +1,9 @@
-import { Ship, Coordinate, ShipType } from './types';
-
 class Battleship implements Ship {
   type: ShipType;
-  start: Coordinate;
-  end: Coordinate;
+  start?: Coordinate;
+  end?: Coordinate;
   placed: Boolean = false;
-  length: number;
+  length: number = 0;
   damage: number = 0;
   destroyed: Boolean = false;
   constructor(type: ShipType) {
@@ -30,6 +28,15 @@ class Battleship implements Ship {
     this.start = start;
     this.end = end;
     this.placed = true;
+  }
+  public takeDamage(): void {
+    if (!this.destroyed) {
+      this.damage++;
+      if (this.damage == this.length) {
+        this.destroyed = true;
+      }
+      return;
+    }
   }
 }
 

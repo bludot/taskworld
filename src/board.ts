@@ -1,8 +1,9 @@
-import { Ship, Coordinate, ShipType } from './types';
 import Battleship from './battleship';
+import lineLine from 'intersects/line-line';
+import linePoint from 'intersects/line-point';
 
 class Board {
-  ships: Ship[] = [
+  private ships: Ship[] = [
     new Battleship(ShipType.Submarine),
     new Battleship(ShipType.Submarine),
     new Battleship(ShipType.Submarine),
@@ -18,16 +19,16 @@ class Board {
   constructor() {
 
   }
-  public placeShip(type: ShipType, start: Coordinate, end: Coordinate) {
+  public placeShip(type: ShipType, start: Coordinate, end: Coordinate): void {
     const ship = this.ships.find(ship => type === ship.type && !ship.placed);
     if (!ship) {
       throw new Error('You have placed all ships of this type!');
     }
-    
+
     // TODO: Add checks if fits on board or matches hits another ship (cant overlap)
-    
+
     // Check if ship matches length
-    this.checkValidPlacement(ship, start, end);
+    this.checkValidPlacement(ship, start, end); // This will throw error if not able to place
     ship.place(start, end);
   }
   /* istanbul ignore next */
@@ -54,11 +55,56 @@ class Board {
     }
 
     // Get distance and check
-    const distance = Math.sqrt(Math.pow((start.x - end.x),2) + Math.pow((start.y - end.y),2));
+    const distance = Math.sqrt(Math.pow((start.x - end.x), 2) + Math.pow((start.y - end.y), 2)) + 1;
     if (distance !== ship.length) {
       throw new Error('Invalid coordinate placements!');
     }
-    //TODO: check overlapping placement
+    //Get all ships that are placed and check if any overlap
+    // This script coincidentally returns true if put next to one another
+    const placedShips = this.ships.filter(aShip => aShip !== ship && aShip.placed);
+    const intersect = placedShips.some(testShip => {
+      if (testShip && testShip.start && testShip.end) {
+        return lineLine(start.x, start.y, end.x, end.y, testShip.start.x, testShip.start.y, testShip.end.x, testShip.end.y, 1, 1);
+      }
+      return false;
+    });
+    if (intersect) {
+      throw new Error('Intersects another Ship!');
+    }
+
+    //TODO: Ships should have at least one square between them in all directions.
+  }
+  
+  public anyUnplacedShips(): Boolean {
+    return this.ships.some(ship => !ship.placed);
+  }
+
+  public attack(point: Coordinate): Battleship | Boolean {
+    const shipHit = this.ships.find(ship => {
+      if (ship && ship.start && ship.end) {
+        return linePoint(
+          ship.start.x,
+          ship.start.y,
+          ship.end.x,
+          ship.end.y,
+          point.x,
+          point.y
+        );
+      }
+      return false;
+    });
+    // Check if already sunk/destroyed
+    if (shipHit?.destroyed) {
+      return false; // We already sunk it so we hit water
+    }
+    // We hit a ship
+    if (shipHit) {
+      shipHit.takeDamage();
+    }
+    return shipHit || false;
+  }
+  public getUnSunkenShips(): Boolean {
+    return this.ships.some(ship => !ship.destroyed)
   }
 }
 

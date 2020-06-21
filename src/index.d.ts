@@ -1,37 +1,38 @@
-export interface Coordinate {
+declare interface Coordinate {
   x: number;
   y: number;
 }
 
-export interface GameState {
+declare interface GameState {
 
 }
 
-export enum ShipType {
+declare enum ShipType {
   Battleship,
   Cruiser,
   Destroyer,
   Submarine
 }
 
-export interface Ship {
+declare interface Ship {
   type: ShipType;
-  start: Coordinate;
-  end: Coordinate;
+  start?: Coordinate;
+  end?: Coordinate;
   placed: Boolean;
   length: number;
   damage: number;
   destroyed: Boolean;
   place(start: Coordinate, end: Coordinate): void;
+  takeDamage(): void;
 }
 
-export interface Move {}
+declare interface Move {}
 
-export enum PlayerType {
+declare enum PlayerType {
   Defender,
   Attacker
 }
 
-export interface Player {
+declare interface Player {
   type: PlayerType;
 }

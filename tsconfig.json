@@ -1,20 +1,42 @@
 {
   "compilerOptions": {
-    "lib": ["es5", "es6"],
-    "target": "es6",
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "sourceMap": true,
-    "outDir": "dist"
+      "alwaysStrict": true,
+      "experimentalDecorators": true,
+      "module": "commonjs",
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "moduleResolution": "node",
+      "noEmitOnError": false,
+      "strict": true,
+      "sourceMap": true,
+      "lib":[
+        "es2015"
+      ],
+      "rootDir": "src",
+      "baseUrl": "src",
+      "outDir": "dist",
+      "rootDirs": [
+        "src"
+      ],
+      "noUnusedLocals": true,
+      "noImplicitThis": true,
+      "noImplicitReturns": true,
+      "noUnusedParameters": true,
+      "pretty": true,
+      "preserveConstEnums": true,
+      "stripInternal": true,
+      "target": "esnext",
+      "typeRoots": [
+          "node_modules/@types",
+          "src/types",
+      ]
   },
-  "include": [
-      "src/**/*"
-  ],
   "exclude": [
     "node_modules"
+  ],
+  "compileOnSave": true,
+  "files": [
+    "src/index.ts",
+    "src/index.d.ts"
   ]
 }

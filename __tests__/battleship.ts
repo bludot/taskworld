@@ -38,9 +38,19 @@ describe('Battleship', () => {
     expect(ship.end).toBeUndefined;
   });
   it('should place ship and set placed', () => {
-    instance.place({x:0, y:0}, {x: 3, y: 0});
+    instance.place({x:0, y:0}, {x: 2, y: 0});
     expect(instance.placed).toBeTruthy;
     expect(instance.start).toEqual({x:0, y:0});
-    expect(instance.end).toEqual({x:3, y:0});
-  })
+    expect(instance.end).toEqual({x:2, y:0});
+  });
+
+  it('should take Damage', () => {
+    instance.takeDamage();
+    expect(instance.damage).toEqual(1);
+    instance.takeDamage();
+    instance.takeDamage();
+    expect(instance.destroyed).toBeTruthy;
+    instance.takeDamage();
+    expect(instance.damage).toEqual(3);
+  });
 })
