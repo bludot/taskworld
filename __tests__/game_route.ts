@@ -94,7 +94,6 @@ describe('gameRouter', () => {
           y: 1
         }
       });
-    console.log(response.body);
     expect(response.status).toEqual(200);
     expect(response.body).toEqual({
       status: "MISS",

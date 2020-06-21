@@ -123,7 +123,6 @@ gameRouter.post('/:gameId/attack', checkSchema({
         message: `You just sank a ${attackResult.type}`
       })
     }
-    console.log(attackResult);
     return res.json({
       status: "HIT",
       message: "HIT"
@@ -134,9 +133,16 @@ gameRouter.post('/:gameId/attack', checkSchema({
       message: "MISS"
     });
   } else {
+    // get hits to sink ships
+    const hits = game.getStatus().ships.reduce((acc: number, ship: any) => {
+      acc+=ship.length;
+      return acc;
+    }, 0);
     return res.json({
       status: "WIN",
-      message: `Win! You have completed the game in ${game.getMoves()} moves`
+      message: `Win! You have completed the game in ${game.getMoves()} moves`,
+      moves: game.getMoves(),
+      missedShots: game.getMoves()-hits
     })
   }
 });

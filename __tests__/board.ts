@@ -64,7 +64,7 @@ describe('Board', () => {
   it('should fail with intersects another ship', async () => {
     instance.placeShip(ShipType.Submarine, {x: 0, y: 0}, {x:2, y:0});
     expect(() => {
-      instance.placeShip(ShipType.Submarine, {x: 1, y: 0}, {x:3, y:0});
+      instance.placeShip(ShipType.Submarine, {x: 0, y: 0}, {x:0, y:2});
     }).toThrow('Intersects another Ship!');
   });
   it('Should attack ship and destroy', async () => {

@@ -17,7 +17,6 @@ class Board {
     new Battleship(ShipType.Cruiser),
     new Battleship(ShipType.Battleship),
   ];
-  placements: number[] = [];
   constructor() {
 
   }
@@ -75,6 +74,19 @@ class Board {
     }
 
     //TODO: Ships should have at least one square between them in all directions.
+    /*
+    const neighborShip = placedShips.some(testShip => {
+      if (testShip && testShip.start && testShip.end) {
+        
+        return (
+          start.x
+        )
+      }
+      return false;
+    });
+    if (neighborShip) {
+      throw new Error('Intersects another Ship!');
+    }*/
   }
   
   public anyUnplacedShips(): Boolean {

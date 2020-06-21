@@ -12,6 +12,11 @@ services:
     ports:
       - "3000:3000"
       - "5858:5858"
+    networks:
+      - 'development'
 
 volumes:
   taskworld_deps:
+
+networks:
+  development:
